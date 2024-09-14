@@ -13,13 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n)ketjhf)59rdzgo^2%ala(rm9xi@lpoy2av4%_x(!qh&b-wcg'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # DEBUG = False # when it's production
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+  'makady.mysql.pythonanywhere-services.com'
+]
 
 
 # Application definition
@@ -119,11 +121,10 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # what does this line mean
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': env('DB_NAME'), 
         'USER': env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
-        # 'PASSWORD': '6IMn@Xxc',
         'HOST': env('DB_HOST'), 
         'PORT': env('DB_PORT'),
     }
