@@ -1,6 +1,10 @@
 import os
 from pathlib import Path
 
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,6 +17,7 @@ SECRET_KEY = 'django-insecure-n)ketjhf)59rdzgo^2%ala(rm9xi@lpoy2av4%_x(!qh&b-wcg
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False # when it's production
 
 ALLOWED_HOSTS = ['*']
 
@@ -66,7 +71,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+  'http://localhost:3000',
+  'https://mokoo.vercel.app'
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -93,10 +99,33 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': BASE_DIR / 'moko_db',
+#         'USER': 'moko',
+#         'PASSWORD': 'cRistiano6261',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # what does this line mean
+        'NAME': env('DB_NAME'), 
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        # 'PASSWORD': '6IMn@Xxc',
+        'HOST': env('DB_HOST'), 
+        'PORT': env('DB_PORT'),
     }
 }
 

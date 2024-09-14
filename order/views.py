@@ -35,9 +35,9 @@ class OrderViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.Create
             user = self.request.user
 
             orderitems = OrderItem.objects.filter(user=user, order=None)
-            if not orderitems.exists():
-                raise Response({'details': "No products in cart"},
-                               status=status.HTTP_400_BAD_REQUEST)
+            # if not orderitems.exists():
+                # raise Response({'details': "No products in cart"},
+                #                status=status.HTTP_400_BAD_REQUEST)
 
             # Save order with the user
             order = serializer.save(user=user)
